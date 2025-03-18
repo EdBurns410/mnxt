@@ -52,7 +52,8 @@
       "name": "Write Source Temp File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
-      "position": [400, 300]
+      "position": [400, 300],
+      "id": "69f52813-ec3d-4b0f-b2b2-08102485085f"
     },
     {
       "parameters": {
@@ -148,4 +149,180 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "pythonCode": "import pandas as pd\\n\\ndf = pd.DataFrame($input.all())\\nemail_col = $node['Start Workflow'].json['finalEmailCol']\\npatterns = {\\n    'first.last': lambda row: f\\\"{row['First Name Trimmed']}.{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firstlast': lambda row: f\\\"{row['First Name Trimmed']}{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first_last': lambda row: f\\\"{row['First Name Trimmed']}_{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'flast': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firstl': lambda row: f\\\"{row['First Name Trimmed']}{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f_last': lambda row: f\\\"{row['First Name Trimmed'][0]}_{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first': lambda row: f\\\"{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last': lambda row: f\\\"{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'lastf': lambda row: f\\\"{row['Last Name Trimmed']}{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'first-last': lambda row: f\\\"{row['First Name Trimmed']}-{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first-l': lambda row: f\\\"{row['First Name Trimmed']}-{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f-last': lambda row: f\\\"{row['First Name Trimmed'][0]}-{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last.first': lambda row: f\\\"{row['Last Name Trimmed']}.{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'l.first': lambda row: f\\\"{row['Last Name Trimmed'][0]}.{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'flast3': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed'][-3:]}@{row['Email Domain']}\\\",\\n    'firstlastfr4': lambda row: f\\\"{row['First Name Trimmed']}{row['Last Name Trimmed'][:4]}@{row['Email Domain']}\\\",\\n    'first_l': lambda row: f\\\"{row['First Name Trimmed']}_{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'fl': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'lf': lambda row: f\\\"{row['Last Name Trimmed'][0]}{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f.last': lambda row: f\\\"{row['First Name Trimmed'][0]}.{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs.last': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}.{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs-last': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}-{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs_last': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}_{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first.las': lambda row: f\\\"{row['First Name Trimmed']}.{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first-las': lambda row: f\\\"{row['First Name Trimmed']}-{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first_las': lambda row: f\\\"{row['First Name Trimmed']}_{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firslast': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'flas': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'l-first': lambda row: f\\\"{row['Last Name Trimmed'][0]}-{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'l_first': lambda row: f\\\"{row['Last Name Trimmed'][0]}_{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last_first': lambda row: f\\\"{row['Last Name Trimmed']}_{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last-firs': lambda row: f\\\"{row['Last Name Trimmed']}-{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last_firs': lambda row: f\\\"{row['Last Name Trimmed']}_{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'lastl': lambda row: f\\\"{row['Last Name Trimmed']}{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'firs': lambda row: f\\\"{row['First Name Trimmed
+        "pythonCode": "import pandas as pd\\n\\ndf = pd.DataFrame($input.all())\\nemail_col = $node['Start Workflow'].json['finalEmailCol']\\npatterns = {\\n    'first.last': lambda row: f\\\"{row['First Name Trimmed']}.{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firstlast': lambda row: f\\\"{row['First Name Trimmed']}{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first_last': lambda row: f\\\"{row['First Name Trimmed']}_{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'flast': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firstl': lambda row: f\\\"{row['First Name Trimmed']}{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f_last': lambda row: f\\\"{row['First Name Trimmed'][0]}_{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first': lambda row: f\\\"{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last': lambda row: f\\\"{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'lastf': lambda row: f\\\"{row['Last Name Trimmed']}{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'first-last': lambda row: f\\\"{row['First Name Trimmed']}-{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first-l': lambda row: f\\\"{row['First Name Trimmed']}-{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f-last': lambda row: f\\\"{row['First Name Trimmed'][0]}-{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last.first': lambda row: f\\\"{row['Last Name Trimmed']}.{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'l.first': lambda row: f\\\"{row['Last Name Trimmed'][0]}.{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'flast3': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed'][-3:]}@{row['Email Domain']}\\\",\\n    'firstlastfr4': lambda row: f\\\"{row['First Name Trimmed']}{row['Last Name Trimmed'][:4]}@{row['Email Domain']}\\\",\\n    'first_l': lambda row: f\\\"{row['First Name Trimmed']}_{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'fl': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'lf': lambda row: f\\\"{row['Last Name Trimmed'][0]}{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f.last': lambda row: f\\\"{row['First Name Trimmed'][0]}.{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs.last': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}.{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs-last': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}-{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs_last': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}_{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first.las': lambda row: f\\\"{row['First Name Trimmed']}.{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first-las': lambda row: f\\\"{row['First Name Trimmed']}-{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'first_las': lambda row: f\\\"{row['First Name Trimmed']}_{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firslast': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}{row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'flas': lambda row: f\\\"{row['First Name Trimmed'][0]}{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'l-first': lambda row: f\\\"{row['Last Name Trimmed'][0]}-{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'l_first': lambda row: f\\\"{row['Last Name Trimmed'][0]}_{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last_first': lambda row: f\\\"{row['Last Name Trimmed']}_{row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last-firs': lambda row: f\\\"{row['Last Name Trimmed']}-{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last_firs': lambda row: f\\\"{row['Last Name Trimmed']}_{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'lastl': lambda row: f\\\"{row['Last Name Trimmed']}{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'firs': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'las': lambda row: f\\\"{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs.las': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}.{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs-las': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}-{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'firs_las': lambda row: f\\\"{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}_{row['Last Name Trimmed'][:4] if len(row['Last Name Trimmed']) >= 4 else row['Last Name Trimmed']}@{row['Email Domain']}\\\",\\n    'last.firs': lambda row: f\\\"{row['Last Name Trimmed']}.{row['First Name Trimmed'][:4] if len(row['First Name Trimmed']) >= 4 else row['First Name Trimmed']}@{row['Email Domain']}\\\",\\n    'f.l': lambda row: f\\\"{row['First Name Trimmed'][0]}.{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f-l': lambda row: f\\\"{row['First Name Trimmed'][0]}-{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'f_l': lambda row: f\\\"{row['First Name Trimmed'][0]}_{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'l.f': lambda row: f\\\"{row['Last Name Trimmed'][0]}.{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'l-f': lambda row: f\\\"{row['Last Name Trimmed'][0]}-{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'l_f': lambda row: f\\\"{row['Last Name Trimmed'][0]}_{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'last.f': lambda row: f\\\"{row['Last Name Trimmed']}.{row['First Name Trimmed'][0]}@{row['Email Domain']}\\\",\\n    'first.l': lambda row: f\\\"{row['First Name Trimmed']}.{row['Last Name Trimmed'][0]}@{row['Email Domain']}\\\"\\n}\\n\\ndef guess_email(row):\\n    if pd.notna(row[email_col]) and row[email_col]:\\n        return row[email_col]\\n    domain = row['Email Domain']\\n    if not domain:\\n        matching_rows = df[(df[company_col] == row[company_col]) & (df['Email Domain'].notna())]\\n        domain = matching_rows['Email Domain'].iloc[0] if not matching_rows.empty else 'unknown.com'\\n    pattern = domain_patterns.get(domain, 'first.last')\\n    return patterns[pattern](row)\\n\\ndf['Guessed Email'] = df.apply(guess_email, axis=1)\\nreturn df.to_dict(orient='records')"
+      },
+      "name": "Guess Emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [2220, 300]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "filePath": "source_v3_FinalWithGuesses_{{new Date().toISOString()}}.xlsx",
+        "sheetName": "FinalWithGuesses"
+      },
+      "name": "Write Final Output",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [2440, 300]
+    }
+  ],
+  "connections": {
+    "Start Workflow": {
+      "main": [
+        [
+          {
+            "node": "Write Source Temp File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Write Target Temp File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Source Temp File": {
+      "main": [
+        [
+          {
+            "node": "Read Source Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Target Temp File": {
+      "main": [
+        [
+          {
+            "node": "Read Target Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Source Excel": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Target Excel": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "Write Duplicates Removed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Duplicates Removed": {
+      "main": [
+        [
+          {
+            "node": "Read Processed Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Processed Sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter Non-Blank Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Non-Blank Emails": {
+      "main": [
+        [
+          {
+            "node": "Process Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Emails": {
+      "main": [
+        [
+          {
+            "node": "Detect Patterns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect Patterns": {
+      "main": [
+        [
+          {
+            "node": "Write Non-Blank Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Non-Blank Processed": {
+      "main": [
+        [
+          {
+            "node": "Guess Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guess Emails": {
+      "main": [
+        [
+          {
+            "node": "Write Final Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "timezone": "UTC",
+    "saveExecutionProgress": true
+  },
+  "notes": "Instructions: Use the 'Start Workflow' node to upload 'sourceFile' and 'targetFile' Excel workbooks and specify column names. Execute manually to process."
+}
