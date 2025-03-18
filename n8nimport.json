@@ -41,35 +41,12 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [240, 300],
-      "notes": "Upload 'sourceFile' (contacts) and 'targetFile' (LinkedIn comparison) Excel workbooks here. Specify column names in the form."
-    },
-    {
-      "parameters": {
-        "fileName": "temp_source_{{new Date().toISOString()}}.xlsx",
-        "binaryPropertyName": "sourceFile",
-        "options": {}
-      },
-      "name": "Write Source Temp File",
-      "type": "n8n-nodes-base.writeBinaryFile",
-      "typeVersion": 1,
-      "position": [400, 300],
-      "id": "69f52813-ec3d-4b0f-b2b2-08102485085f"
-    },
-    {
-      "parameters": {
-        "fileName": "temp_target_{{new Date().toISOString()}}.xlsx",
-        "binaryPropertyName": "targetFile",
-        "options": {}
-      },
-      "name": "Write Target Temp File",
-      "type": "n8n-nodes-base.writeBinaryFile",
-      "typeVersion": 1,
-      "position": [400, 460]
+      "notes": "Select and upload 'sourceFile' (contacts) and 'targetFile' (LinkedIn comparison) Excel workbooks here. Specify column names in the form."
     },
     {
       "parameters": {
         "operation": "read",
-        "filePath": "{{$node['Write Source Temp File'].json['fileName']}}",
+        "binaryProperty": "sourceFile",
         "sheetName": "Sheet1"
       },
       "name": "Read Source Excel",
@@ -80,7 +57,7 @@
     {
       "parameters": {
         "operation": "read",
-        "filePath": "{{$node['Write Target Temp File'].json['fileName']}}",
+        "binaryProperty": "targetFile",
         "sheetName": "{{$node['Start Workflow'].json['targetSheet']}}"
       },
       "name": "Read Target Excel",
@@ -173,33 +150,11 @@
       "main": [
         [
           {
-            "node": "Write Source Temp File",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Write Target Temp File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Write Source Temp File": {
-      "main": [
-        [
-          {
             "node": "Read Source Excel",
             "type": "main",
             "index": 0
           }
-        ]
-      ]
-    },
-    "Write Target Temp File": {
-      "main": [
+        ],
         [
           {
             "node": "Read Target Excel",
@@ -324,5 +279,5 @@
     "timezone": "UTC",
     "saveExecutionProgress": true
   },
-  "notes": "Instructions: Use the 'Start Workflow' node to upload 'sourceFile' and 'targetFile' Excel workbooks and specify column names. Execute manually to process."
+  "notes": "Instructions: Use the 'Start Workflow' node to select and upload 'sourceFile' (contacts) and 'targetFile' (LinkedIn comparison) Excel workbooks. Specify column names in the form and execute manually."
 }
