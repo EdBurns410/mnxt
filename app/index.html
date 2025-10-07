@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workflow Studio SaaS</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <div class="brand">
+          <span class="brand-mark">MNXT</span>
+          <span class="brand-name">Workflow Studio</span>
+        </div>
+        <nav class="site-nav">
+          <button class="nav-btn" data-action="show-plans">Plans</button>
+          <button class="nav-btn" data-action="open-auth">Log in</button>
+          <button class="nav-btn primary" data-action="start-trial">Start free trial</button>
+        </nav>
+      </header>
+
+      <main>
+        <section id="landing" class="view active">
+          <div class="hero">
+            <div class="hero-copy">
+              <h1>Build, document, and scale workflows in minutes.</h1>
+              <p>
+                Workflow Studio helps operations teams orchestrate complex automation with a collaborative canvas,
+                versioned runbooks, and secure governance that grows with your business.
+              </p>
+              <div class="hero-actions">
+                <button class="cta primary" data-action="start-trial">Launch free trial</button>
+                <button class="cta" data-action="open-auth">Log in</button>
+              </div>
+              <ul class="hero-highlights">
+                <li>Save drafts directly in the browser with secure cloud sync</li>
+                <li>Share workflow blueprints across teams instantly</li>
+                <li>Upgrade to unlock advanced automation and enterprise controls</li>
+              </ul>
+            </div>
+            <div class="hero-visual">
+              <div class="preview-card">
+                <h3>Workflow snapshot</h3>
+                <ul>
+                  <li><span class="dot trigger"></span> Webhook → Normalize Payload</li>
+                  <li><span class="dot step"></span> Score Lead Quality</li>
+                  <li><span class="dot step"></span> Route to CRM</li>
+                  <li><span class="dot step"></span> Notify Sales Team</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <section class="features">
+            <h2>Why teams choose Workflow Studio</h2>
+            <div class="feature-grid">
+              <article>
+                <h3>Visual builder</h3>
+                <p>Design end-to-end automations with reusable templates for triggers, steps, and runbooks.</p>
+              </article>
+              <article>
+                <h3>Governance-ready</h3>
+                <p>Granular access controls, change history, and secure storage keep stakeholders confident.</p>
+              </article>
+              <article>
+                <h3>Billing that scales</h3>
+                <p>Start on the free trial and grow into subscription tiers powered by Stripe &amp; Apple Pay.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="plans" id="plan-section">
+            <h2>Plans built for every stage</h2>
+            <div class="plan-grid" id="plan-grid"></div>
+            <p class="plans-note">
+              Apple Pay is automatically enabled through Stripe so your customers can subscribe with a single tap on
+              supported devices.
+            </p>
+          </section>
+        </section>
+
+        <section id="auth" class="view hidden">
+          <div class="auth-card">
+            <div class="tabs">
+              <button class="tab active" data-tab="login">Log in</button>
+              <button class="tab" data-tab="register">Create account</button>
+            </div>
+            <form id="login-form" class="auth-form visible">
+              <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+              <label>Password<input type="password" name="password" required autocomplete="current-password" /></label>
+              <button type="submit" class="primary">Log in</button>
+              <p class="form-hint">
+                Passwords are hashed using bcrypt and never stored in plain text.
+              </p>
+            </form>
+            <form id="register-form" class="auth-form">
+              <label>Name<input type="text" name="name" required autocomplete="name" /></label>
+              <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+              <label>Password<input type="password" name="password" required autocomplete="new-password" minlength="8" /></label>
+              <button type="submit" class="primary">Start free trial</button>
+              <p class="form-hint">Includes a limited free trial with two saved workflows.</p>
+            </form>
+            <button class="link" data-action="close-auth">Back to landing</button>
+            <div class="auth-status" id="auth-status"></div>
+          </div>
+        </section>
+
+        <section id="dashboard" class="view hidden">
+          <div class="dashboard-layout">
+            <aside class="account-panel">
+              <h2>Account</h2>
+              <div class="account-details" id="account-details"></div>
+              <div class="subscription-actions">
+                <h3>Upgrade plan</h3>
+                <div id="subscription-options"></div>
+              </div>
+              <button class="secondary" data-action="logout">Log out</button>
+            </aside>
+
+            <section class="builder-panel">
+              <header class="builder-header">
+                <div>
+                  <h2 id="builder-title">Workflow builder</h2>
+                  <p id="builder-subtitle">Create, document, and orchestrate automation flows.</p>
+                </div>
+                <div class="builder-actions">
+                  <button class="secondary" data-action="new-workflow">New workflow</button>
+                  <button class="primary" data-action="save-workflow">Save workflow</button>
+                </div>
+              </header>
+
+              <div class="builder-columns">
+                <div class="builder-column">
+                  <h3>Metadata</h3>
+                  <form id="metadata-form" class="panel">
+                    <label>Name<input name="name" type="text" placeholder="Lead routing automation" required /></label>
+                    <label>Description<textarea name="description" rows="3" placeholder="Describe the automation goals"></textarea></label>
+                    <label>Owner<input name="owner" type="text" placeholder="team@company.com" /></label>
+                    <label>Category
+                      <select name="category">
+                        <option value="ops">Operations</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="sales">Sales</option>
+                        <option value="support">Support</option>
+                        <option value="product">Product</option>
+                      </select>
+                    </label>
+                  </form>
+
+                  <div class="panel">
+                    <h3>Trigger</h3>
+                    <div id="trigger-options" class="option-list"></div>
+                    <form id="trigger-form"></form>
+                  </div>
+                </div>
+
+                <div class="builder-column">
+                  <div class="panel steps-panel">
+                    <div class="panel-header">
+                      <h3>Steps</h3>
+                      <button class="secondary" data-action="add-step">Add step</button>
+                    </div>
+                    <div id="steps-container" class="steps-container"></div>
+                  </div>
+
+                  <div class="panel">
+                    <h3>Documentation &amp; notes</h3>
+                    <textarea id="documentation-notes" rows="6" placeholder="Document rollout plans, SLAs, and handoffs."></textarea>
+                  </div>
+                </div>
+
+                <div class="builder-column">
+                  <div class="panel">
+                    <h3>Saved workflows</h3>
+                    <ul id="workflow-list" class="workflow-list"></ul>
+                  </div>
+                  <div class="panel">
+                    <h3>History</h3>
+                    <ul id="history-list" class="history-list"></ul>
+                  </div>
+                  <div class="panel">
+                    <h3>JSON export</h3>
+                    <button class="secondary" data-action="export-json">Download JSON</button>
+                    <textarea id="export-output" readonly rows="8"></textarea>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year"></span> MNXT Workflow Studio. Built for modern operations teams.</p>
+      </footer>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
